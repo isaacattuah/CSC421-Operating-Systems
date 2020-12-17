@@ -1,0 +1,102 @@
+#
+# makefile for leveldb project
+# author: bjr
+# last update: 
+#		7 dec 2020	created
+#
+
+MNT= store
+STOR= kv-tables
+
+MF= -f Makefile-x
+L0= l0.dat
+LEVELDB_OPT= -v -s 32
+# if no -s option, use L0_SIZE= 16384,
+# else for -s n, use L0_SIZE= n*64
+#L0_SIZE= 16384
+L0_SIZE= 2048
+
+RED= \033[0;31m
+GREEN= \033[0;32m
+NC= \033[0m
+DOT=  | head -2 | tail -n +2
+NODOT= | tail -n +2
+
+
+all:
+	@echo "make ${MF} l1test-d	:starts deamon"
+	@echo "make ${MF} l1test-1	:runs basic test"
+	@echo "make ${MF} clean	:cleans all"
+
+
+leveldbd: leveldbd.c leveldb-sub.o leveldb.h
+	cc $< `pkg-config fuse --cflags --libs` -o $@ leveldb-sub.o
+
+leveldb-sub.o: leveldb-sub.c leveldb.h 
+	cc `pkg-config fuse --cflags --libs` -o $@ -c $<
+	
+
+${L0}:
+	-rm -rf ${STOR}
+	mkdir ${STOR}
+	dd if=/dev/zero of=${STOR}/${L0} bs=1 count=${L0_SIZE}
+
+l1test-d:
+	cp ../../class/proj7/l0-t1.ref .
+	cp ../../class/proj7/l1-t1.ref .
+	make ${MF} clean
+	make ${MF} ${L0}
+	make ${MF} leveldbd
+	-fusermount -u ${MNT}
+	-mkdir ${MNT} ${STOR}
+	./leveldbd ${LEVELDB_OPT} ${MNT} ${STOR}
+
+
+l1test-1:
+	echo s1 > ${MNT}/s
+	echo t1 > ${MNT}/t
+	echo s2 > ${MNT}/s
+	echo u1 > ${MNT}/u
+	echo v1 > ${MNT}/v
+	echo n1 > ${MNT}/n
+	echo p1 > ${MNT}/p
+	echo g1 > ${MNT}/g
+	echo h1 > ${MNT}/h
+	echo i1 > ${MNT}/i
+	echo af1 > ${MNT}/af
+	echo m2 > ${MNT}/m
+	echo b1 > ${MNT}/b
+	echo g2 > ${MNT}/g
+	echo m3 > ${MNT}/m
+	echo a1 > ${MNT}/a
+	echo aa1 > ${MNT}/aa
+	echo a2 > ${MNT}/a
+	echo r1 > ${MNT}/r
+	echo ab1 > ${MNT}/ab
+	echo t2 > ${MNT}/t
+	cmp ${STOR}/l0.dat l0-t1.ref
+	cmp ${STOR}/l1.dat l1-t1.ref
+	@echo "***\n*** ${GREEN}passed ${NC}\n***"
+
+show-dat:
+	-cmp ${STOR}/l0.dat l0-t1.ref
+	-cmp ${STOR}/l1.dat l1-t1.ref
+	hexdump -C ${STOR}/l0.dat
+	hexdump -C ${STOR}/l1.dat
+
+make-makefiles:
+	cp ../../class/proj7/cr-case.py .
+	python3 cr-case.py 30 store > Makefile-30keys
+	python3 cr-case.py 60 store > Makefile-60keys
+	python3 cr-case.py 90 store > Makefile-90keys
+	python3 cr-case.py 130 store > Makefile-130keys
+
+clean-makefiles:
+	-rm cr-case.py Makefile-30keys Makefile-60keys Makefile-90keys Makefile-130keys
+
+clean:
+	-fusermount -u ${MNT}
+	-rm leveldbd leveldb-sub.o basic-test.out
+	-rmdir ${MNT}
+	-rm -rf ${STOR}
+

@@ -1,0 +1,27 @@
+QUIZ 0
+
+Name:
+Grade:
+
+Date out: 17 aug 2020
+Date due: 21 aug 2020
+
+Copy this file to your own _username_/quiz0/ folder. Do not modify
+anything in the class folder, else subversion will stop your commits! 
+Put your name where it says "Name".
+
+Answer the following questions, then commit the file.
+
+nickname or name:
+
+caneid:
+
+C-number:
+
+5-number:
+
+preferred email:
+
+slack name:
+
+

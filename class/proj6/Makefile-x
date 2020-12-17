@@ -1,0 +1,70 @@
+#
+# makefile for leveldb project
+# author: bjr
+# create: 9 nov 2019
+# last update:
+#
+
+MNT= store
+STOR= kv-tables
+
+MF= -f Makefile
+L0= l0.dat
+
+RED= \033[0;31m
+GREEN= \033[0;32m
+NC= \033[0m
+DOT=  | head -2 | tail -n +2
+NODOT= | tail -n +2
+
+
+all:
+	@echo "make leveldbd	:builds all"
+	@echo "make run-d 		:starts deamon"
+	@echo "make clean		:cleans all"
+	@echo "make test-b2		:runs extended test"
+
+leveldbd: leveldbd.c leveldb-sub.o leveldb.h
+	cc $< `pkg-config fuse --cflags --libs` -o $@ leveldb-sub.o
+
+leveldb-sub.o: leveldb-sub.c leveldb.h 
+	cc `pkg-config fuse --cflags --libs` -o $@ -c $<
+
+${L0}:
+	-rm -rf ${STOR}
+	mkdir ${STOR}
+	dd if=/dev/zero of=${STOR}/${L0} bs=1 count=16384
+
+run-d: leveldbd ${L0}
+	-fusermount -u ${MNT}
+	-mkdir ${MNT} ${STOR}
+	./leveldbd -v ${MNT} ${STOR}
+
+test-b2:
+	@echo "***\n*** ${RED}test key lookup (strncmp) ${NC}\n***"
+	echo "1" > ${MNT}/a
+	echo "2" > ${MNT}/aa
+	echo "3" > ${MNT}/aaa
+	cat ${MNT}/a > test-b2.out
+	cat ${MNT}/aa >> test-b2.out 
+	cat ${MNT}/aaa  >>test-b2.out
+	echo "1" > test-b2.ref
+	echo "2"  >>test-b2.ref
+	echo "3"  >>test-b2.ref
+	diff test-b2.out test-b2.ref
+	# test fuse is running
+	rm ${MNT}/no-exist
+	@echo "***\n*** ${GREEN}passed ${NC}\n***"
+
+
+installfuse:
+	sudo apt-get install libfuse-dev
+	sudo apt-get install pkg-config
+
+clean:
+	-fusermount -u ${MNT}
+	-rm leveldbd leveldb-sub.o basic-test.out extended-test.out
+	-rmdir ${MNT}
+	-rm test-b2.ref test-b2.out
+	-rm -rf ${STOR}
+

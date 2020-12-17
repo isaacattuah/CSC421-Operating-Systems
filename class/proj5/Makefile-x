@@ -1,0 +1,93 @@
+#
+# author: bjr
+# last revision: 27 sep 2020 -bjr created 
+#		
+#
+
+MF= -f Makefile-x
+all:
+	make mymessage
+	
+mymessage:
+	make mymessage
+	
+clean:
+	make clean
+	
+	
+run-reader-x: mymessage
+	./mymessage -vr
+
+run-writer-x: mymessage
+	./mymessage -s1 abc12012
+	
+run-writer-0: mymessage
+	./mymessage 0
+
+run-writer-3-x: mymessage
+	(./mymessage -s1 abcdefghiklmopqrstuvw &);(./mymessage -s2 ABCDEFGHIKLM &);./mymessage -s3 1234567890;echo "done!"
+
+run-reader-mm-x: mymessage
+	./mymessage -rm
+
+run-writer-mm-x: mymessage
+	./mymessage -m hello.world.a.0
+
+run-writer-mm-3-x: mymessage
+	(./mymessage -m -s1 rouge.blue.vert.blanc.noir.jaune.gris.marron.rose &);(./mymessage -m -s2 rojo.azul.verde.blanco.negro&);./mymessage -m -s3 11.10.9.8.7.6.5.4.3.2.1.0;echo "done!"
+
+
+
+#### BASIC TESTS
+
+	# term 1
+basic-1-r:
+	make ${MF} run-reader-x
+	make ${MF} run-reader-x
+	make ${MF} run-reader-x
+	
+	#term2
+basic-1-w:
+	make ${MF} run-writer-x
+	make ${MF} run-writer-0
+	make ${MF} run-writer-3-x
+	make ${MF} run-writer-0
+
+	#term 1
+basic-1-mm-t1:
+	make ${MF} run-reader-mm-x
+	make ${MF} run-reader-mm-x
+	make ${MF} run-writer-mm-x
+	make ${MF} run-writer-mm-3-x
+
+	#term 2
+basic-1-mm-t2:
+	make ${MF} run-writer-mm-x
+	make ${MF} run-writer-mm-3-x
+	sleep 3
+	make ${MF} run-reader-mm-x
+	make ${MF} run-reader-mm-x
+
+
+#### EXTENDED TESTS
+
+
+ext-1-mm-t1:
+	(./mymessage -m AAAAAAAAAAAA.BBBBBBBBB.CCCCCCCC.DDDDDDDDDDD.EEEEEEEEEEE.FFFFFFFFFFF.GGGGGGGGGG.HHHHHHHHHH.IIIIIIIIIII.JJJJJJJJJJJ.KKKKKKKKKKKK.0 &);(./mymessage -m aaaaa.bbbbb.cccc.dddddd.eeeee.ffffff.gggg.fffff.hhhhh.jjjjjj.0&);./mymessage -m 1.2.3.4.5.6.7.8;echo "done!"
+
+ext-1-mm-t2:
+	./mymessage -rm
+
+ext-1-mm-t3:
+	./mymessage -rm
+
+ext-2-w:
+	@echo wait until pauses, then launch extended-1-r
+	./mymessage -v abcdefABCDEF1234567890
+
+ext-2-r:
+	./mymessage -vr
+	
+
+
+

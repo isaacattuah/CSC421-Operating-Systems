@@ -1,0 +1,44 @@
+class: csc421-211
+project: proj6
+student: 
+date:
+
+grade: _/5
+
+basic	 (#):	_/2
+extended ($):	_/2
+code rev. (%):	_/1
+
+lateness:		(0)/(4)
+
+(#)
+- basic
+
+($) 
+- extended
+
+(%)
+- code review
+
+
+commit:
+svn log leveldb-sub.c
+
+comments:
+
+	# extended: code review
+	
+	
+	# basic 
+	# term 1
+	make clean ; make leveldbd ; make run-d
+	
+	# term 2
+	make test
+	
+	# extended
+	# term 2
+	cp ../../class/proj6/Makefile-x . ; make -f Makefile-x test-b2
+	
+
+

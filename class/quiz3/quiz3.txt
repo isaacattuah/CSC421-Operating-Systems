@@ -1,0 +1,17 @@
+QUIZ 3
+
+Name:
+
+Date out: 2 sep 2020
+Date due: 9 sep 2020
+
+
+Copy this file to your own _username_/quiz2/ folder. Do not modify
+anything in the class folder, else subversion will stop your commits! 
+Put your name where it says "Name".
+
+
+Answer the exercise found on the Review of Processor Architecture page:
+
+https://www.cs.miami.edu/home/burt/learning/csc421.211/crash-course/basic-architecture.html
+

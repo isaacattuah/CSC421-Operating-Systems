@@ -1,0 +1,32 @@
+QUIZ 1
+
+Name:
+Grade:
+
+Date out: 21 aug 2020
+Date due: 26 aug 2020
+
+Copy this file to your own _username_/quiz1/ folder. Do not modify
+anything in the class folder, else subversion will stop your commits! 
+Put your name where it says "Name".
+
+Read the Tiny Texbook, the Introduction Section,
+and watch the video "Making Computers Easier to Use", link on the course home
+page under Notes.
+
+Answer the following questions, then commit the file.
+
+1) The video "making computers .. " says there are three parts to the unix 
+   operating system. It had a graphic with 3 nested rotating boxes. 
+
+   What are the 3 parts?
+
+2) Can you name files on your Ubuntu instance that directly correspond to
+   each of the 3 parts? (3 points, one for each part).
+
+3) Name 4 subsystems of the Unix kernel.
+
+4) A unix kernel is a monolithic kenel. What other sorts of kernels are there, and 
+   how do they differ. (Short answer, two sentences).
+
+

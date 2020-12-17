@@ -1,0 +1,43 @@
+QUIZ 2
+
+Name:
+
+Date out: 26 aug 2020
+Date due:  2 sep 2020
+
+
+Copy this file to your own _username_/quiz2/ folder. Do not modify
+anything in the class folder, else subversion will stop your commits! 
+Put your name where it says "Name".
+
+
+Concerning Makefile:
+
+1) What does the "words" target do? 
+   Why are the words printed in the correct order?
+
+2) Change the target to write "is The price right!"
+
+2) What does the count target do?
+   What idea was used to printout a count.
+   
+3) Modify the count target to count by 7's starting and 7 and ending at 21.
+
+4) What does the target hello do?
+
+Concerning Makefile-hello
+
+5) Based on the hello target in Makefile, write a makefile that builds
+   a program like the hello.c program, but instead of hello world, prints
+   out whatever is in the greetings-file.txt file.
+
+   a- correct behavior should rebuilt the hello.c file when the 
+      greetings-file.txt file changes.
+   b- correct behavior should rebuid hello when hello.c changes.
+   c- correct behavior should not rebuild things unnecessarily.
+   d- correct behavior will create a clean target that cleans up the
+      build products
+   e- correct solutions should fill in the created and last updated 
+      with the student name, and some revision/creation date.
+
+

@@ -1,0 +1,55 @@
+class: csc421-211
+project: proj7
+student: 
+date:
+
+grade: _/6
+
+basic 1 (%):	_/1
+basic 2 (#):	_/1
+basic 3 ($):	_/2
+EC (!):			_/2
+
+lateness:		(0)/(4)
+
+(%)
+- basic 1
+	after make -f Makefile-x l1test-1 
+	then make -F Mafile-x show-dat shows some reasonable l0.dat l1.dat
+
+(#) 
+- basic 2
+	if in addition the demon did nota crash, the l0.dat and l1.dat show 
+	values that were inserted at some time, that 11.dat has some content
+	and it show signs of being sorted
+	
+($)
+- basic 3
+	if in addition, the l0.dat and l1.dat match the reference files
+
+(!)
+- Extra credit
+
+
+commit:
+svn log leveldb-sub.c
+
+comments:
+
+	# basic
+	cp ../../class/proj7/l0-t1.ref . 
+	cp ../../class/proj7/l1-t1.ref . 
+	cp ../../class/proj7/Makefile-x . 
+	make -f Makefile-x l1test-d
+	
+	# term 1
+	make -f Makefile-x l1test-1
+	
+	# extended (L2)
+	make -f Makefile-x make-makefiles
+	make -f Makefile-90keys
+	make -f Makefile-130keys
+	
+	
+
+

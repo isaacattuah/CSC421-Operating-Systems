@@ -1,0 +1,65 @@
+class: csc421-211
+project: proj5
+student: 
+date:
+
+grade: _/6
+
+code review(&):	_/1
+basic 1 (#):	_/2
+basic 2 ($):	_/2
+extend  (%):	_/1
+EC (!):			_/_
+
+lateness:		(0)/(4)
+
+(&)
+- code review: comments on the monitor implementation 
+
+(#)
+- basic 1: partial and complete 
+  Makefile-x basic-1-r, basic-1-w (two terminals)
+
+($)
+- basic 2: partial and complete 
+  Makefile-x basic-1-mm-t1, basic-1-mm-t2 (two terminals)
+
+($)
+- extend
+  Makefile-x ext-1-mm-t1, ext-1-mm-t2, ext-1-mm-t3 (three terminals)
+
+EC (!):			_/_
+(!)
+- if extended was awarded points, EC is 1 point
+- else up to two points for correcting basic test deficiencies
+
+
+commit:
+svn log mymessage-sub.c
+
+comments:
+	# code review
+	
+	# test 1
+		# reader
+		make -f Makefile-x  basic-1-r
+		
+		# writer
+		make -f Makefile-x  basic-1-w
+	
+	# test 2
+		# term 1 
+		make -f Makefile-x basic-1-mm-t1
+		
+		# term 2
+		make -f Makefile-x basic-1-mm-t2
+		
+	#extended 1
+		# term 2
+		# term 3
+		# term 1
+
+	# EC
+	# test 1
+	# test 2
+	

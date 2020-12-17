@@ -1,0 +1,29 @@
+QUIZ 4
+
+Name:
+Grade:
+
+Date out: 9 sep 2020
+Date due: 14 sep 2020
+
+1) Copy the class/quiz4 contents to your _username_/quiz4 folder. 
+2) Put your name after "Name:", above. Then svn add and commit.
+3) Complete the assignment:
+
+You are provided with a quiz4.c file, an empty quiz4.h file, an empty
+quiz4-sub.c file, and a Makefile.
+
+As delivered, most of the code is present, but to complete the quiz you 
+must move all the subroutines (except main) to the quiz4-sub.c file.
+
+You will need to modify and include the quiz4.h, and modify the Makefile 
+to include build target for quiz4-sub.o.
+
+You also need to complete the print_all routine to print all the words in
+the word_array, with delimit separating the words, and a \n after the 
+last word.
+
+For a completely correct Makefile, consider all dependencies and add a clean
+target that remove build products.
+
+

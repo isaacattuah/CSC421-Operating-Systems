@@ -1,0 +1,40 @@
+class: csc421-211
+project: proj2
+student: aiko
+date:
+
+grade: 3/5
+
+passes basic test (#):		3/3
+passes extended test(%):	0/2
+lateness:		(0)/(4)
+
+(#)
+- passes basic test
+	makefile test
+
+(%)
+- passes extended test 
+	makefile-ext ext-test
+
+
+
+commit:
+r400 | aiko | 2020-09-11 00:15:52 -0400 (Fri, 11 Sep 2020) | 1 line
+
+comments:
+
+	ojo@csc421-211:~/csc421-all.svn/aiko/proj2$ make -f Makefile-ext 
+	make -f Makefile-ext ext-test
+	make[1]: Entering directory '/home/ojo/csc421-all.svn/aiko/proj2'
+	./ringbuf -- -a+ > test.out
+	./ringbuf -- -+a+-+ >> test.out
+	./ringbuf a+-+b+-+c+-+d+-+e+-+f+-+g+-+h+-+i+-+j+-+k+-+l+-+m+-+n+-+o+-+p+-+q+-+r+-+s+-+t+-+ >> test.out
+	./ringbuf abcdefg---------+hijkl+m+n+o+p+q+r+s+t+uvwx+yz123+---+-+-+-+ >> test.out
+	diff test.out test.ref
+	Binary files test.out and test.ref differ
+	Makefile-ext:35: recipe for target 'ext-test' failed
+	make[1]: *** [ext-test] Error 2
+	make[1]: Leaving directory '/home/ojo/csc421-all.svn/aiko/proj2'
+	Makefile-ext:19: recipe for target 'build' failed
+	make: *** [build] Error 2

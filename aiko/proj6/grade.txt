@@ -1,0 +1,107 @@
+class: csc421-211
+project: proj6
+student: aiko
+date:
+
+grade: 2/5
+
+basic	 (#):	2/2
+extended ($):	0/2
+code rev. (%):	0/1
+
+lateness:		(0)/(4)
+
+(#)
+- basic
+
+($) 
+- extended
+
+(%)
+- code review
+
+commit:
+r945 | aiko | 2020-11-09 18:34:17 -0500 (Mon, 09 Nov 2020) | 1 line
+
+
+comments:
+	# code review
+	line 83: return  &kv_pair[key_index] ;
+	key_index can be out of bounds
+
+	# basic test
+	ojo@csc421-211:~/csc421.svn/aiko/proj6$ make test
+		test if leveldb is running
+		ls store
+		level0	level1	level2	system
+		***
+		*** key-value pair (hello:world) 
+		***
+		echo -n "hello" > store/world
+		ls -l store/world
+		-rwxrwxrwx 1 root root 9 Dec 31  1969 store/world
+		cat store/world > basic-test.out
+		rm store/world
+		ls -l store/world
+		-rwxrwxrwx 1 root root 4 Dec 31  1969 store/world
+		***
+		*** four key-value pairs 
+		***
+		echo -n "test " > store/d
+		echo -n "is " > store/b
+		echo -n "this " > store/a
+		echo -n "a " > store/c
+		ls -l store/b store/c store/d store/a
+		-rwxrwxrwx 1 root root 5 Dec 31  1969 store/a
+		-rwxrwxrwx 1 root root 3 Dec 31  1969 store/b
+		-rwxrwxrwx 1 root root 2 Dec 31  1969 store/c
+		-rwxrwxrwx 1 root root 5 Dec 31  1969 store/d
+		cat store/a store/b store/c store/d >> basic-test.out
+		echo -n "test " > store/a
+		echo -n "was " > store/c
+		echo -n "this " > store/b
+		echo -n "a " > store/d
+		ls -l store/b store/c store/d store/a
+		-rwxrwxrwx 1 root root 5 Dec 31  1969 store/a
+		-rwxrwxrwx 1 root root 5 Dec 31  1969 store/b
+		-rwxrwxrwx 1 root root 4 Dec 31  1969 store/c
+		-rwxrwxrwx 1 root root 2 Dec 31  1969 store/d
+		cat store/b store/c store/d store/a >> basic-test.out
+		rm store/b store/c store/d store/a
+		ls -l store/b store/c store/d store/a
+		-rwxrwxrwx 1 root root 0 Dec 31  1969 store/a
+		-rwxrwxrwx 1 root root 0 Dec 31  1969 store/b
+		-rwxrwxrwx 1 root root 0 Dec 31  1969 store/c
+		-rwxrwxrwx 1 root root 0 Dec 31  1969 store/d
+		cat store/b store/c store/d store/a >> basic-test.out
+		hexdump -C kv-tables/l0.dat >> basic-test.out
+		diff basic-test.out basic-test.ref
+		***
+		*** passed 
+		***
+		
+	# extended test
+	
+	ojo@csc421-211:~/csc421.svn/aiko/proj6$ cp ../../class/proj6/Makefile-x . ; make -f Makefile-x test-b2
+		***
+		*** test key lookup (strncmp) 
+		***
+		echo "1" > store/a
+		echo "2" > store/aa
+		echo "3" > store/aaa
+		cat store/a > test-b2.out
+		cat store/aa >> test-b2.out 
+		cat store/aaa  >>test-b2.out
+		echo "1" > test-b2.ref
+		echo "2"  >>test-b2.ref
+		echo "3"  >>test-b2.ref
+		diff test-b2.out test-b2.ref
+		1,2c1,2
+		< 3
+		< 3
+		---
+		> 1
+		> 2
+		Makefile-x:44: recipe for target 'test-b2' failed
+		make: *** [test-b2] Error 1
+

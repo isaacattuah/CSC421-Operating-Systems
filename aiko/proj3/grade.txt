@@ -1,0 +1,20 @@
+class: csc421-211
+project: proj3
+student: aiko
+date:
+
+grade: 3/3
+
+passes basic test (#):		3/3
+lateness:		(0)/(2)
+
+(#)
+- passes basic test
+	
+
+commit:
+r548 | aiko | 2020-09-18 12:56:14 -0400 (Fri, 18 Sep 2020) | 1 line
+
+comments:
+	
+	

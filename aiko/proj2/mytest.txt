@@ -1,0 +1,32 @@
+enq: m
+enq: y
+enq: t
+enq: e
+enq: a
+enq: c
+enq: h
+enq: e
+enq: r
+enq: i
+enq: s
+enq: b
+enq: u
+enq: r
+enq: t
+ioc: 16 0 0 15
+deq: m
+enq: y
+enq: e
+enq: full
+ioc: 16 0 1 16
+deq: y
+deq: t
+deq: e
+deq: a
+deq: c
+enq: h
+enq: e
+deq: h
+deq: e
+enq: i
+enq: s

@@ -1,0 +1,2 @@
+CNUM		svn		q0	q1	q2	q4	q5	p0	l0	p1	l1	p2	l2	p3	l3	p4	l4
+C12128661	aiko	1	4	4	4	7	5	0	5	0	3	0	3	0	5	0

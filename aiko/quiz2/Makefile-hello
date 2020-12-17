@@ -1,0 +1,35 @@
+#
+# quiz2 makefile
+# csc421 semester 211
+# created: Isaac Attuah 9/2/2020 
+# last-update: Isaac Attuah 9/2/2020
+#       
+#
+
+F= greetings-file.txt
+M= Makefile-hello
+
+# complete the makefile as instructed in the quiz2.txt file # you will need to add dependencies after the target(s) 
+# as well as actions in the recipes
+
+program: hello
+	@echo run hello
+	./hello
+
+hello.c: $F
+	@echo make hello.c based on $F and $M
+	@echo "#include<stdio.h>" > hello.c
+	@echo "int main(){printf(" >> hello.c
+	@cat $F >> hello.c
+	@echo ");}" >> hello.c
+
+
+hello: hello.c
+	@echo compile hello.c
+	cc -o hello hello.c
+
+clean:
+	@echo cleanup hello
+	-rm hello hello.c
+
+

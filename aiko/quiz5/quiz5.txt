@@ -1,0 +1,43 @@
+QUIZ 5
+
+Name:
+Grade: 7/7
+
+comment:
+	no comments
+	
+	
+Date out: 13 sep 2020
+Date due: 23 sep 2020
+
+The CAOS team were working on a very simple operating system, CAOS, the CAnes 
+Operating Systems. And because they are really old people and never really wanted
+to change how they did things, the are writing the operating system on punched
+cards.
+
+Unfortunately, if you drop a deck of punched cards, they get scrambled. The lines
+are ok, the words and characters do not get scrambled. But the lines get shuffled. 
+And that is what happened to their shell program, coas-sh.c
+
+Your assignment is to put it back in order.
+
+Here is a sample session with caos-sh when it is working:
+
+    ojo@raritan quiz5 % make
+    cc -o caos-sh caos-sh.c
+    ojo@raritan quiz5 % ./caos-sh 
+    ?: l
+    Makefile	caos-sh		caos-sh.c
+    ?: d
+    Wed Sep 16 13:15:54 EDT 2020
+    ?: w
+    possible commands are - l: ls, p: ps, d: date
+    ?: p
+      PID TTY           TIME CMD
+     6317 ttys002    0:00.06 -zsh
+     6321 ttys002    1:00.49 /Users/ojo/anaconda3/bin/python /Users/ojo/anaconda3/bin/jupyter-notebook
+    12227 ttys003    0:00.09 -zsh
+    13456 ttys003    0:00.00 ./caos-sh
+    ?: q
+    ojo@raritan quiz5 % 
+    

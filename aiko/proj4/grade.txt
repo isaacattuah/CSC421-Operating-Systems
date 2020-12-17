@@ -1,0 +1,28 @@
+class: csc421-211
+project: proj4
+student: aiko
+date:
+
+grade: 5/5
+
+evidence.tar (#):	1/1
+syslog line ($):	2/2
+uname and tag (%):	2/2
+
+lateness:		(0)/(4)
+
+(#)
+- evidence.tar submitted
+	
+($)
+- syslog, and has "Captain Kernel"
+
+(%)
+- uname, and has correct tag
+
+commit:
+r637 | aiko | 2020-09-25 16:44:56 -0400 (Fri, 25 Sep 2020) | 1 line
+
+comments:
+	
+	

@@ -1,0 +1,30 @@
+class: csc421-211
+project: proj1
+student: aiko
+date:
+
+grade: 5/5
+
+passes basic test (#):		3/3
+passes extended test(%):	2/2
+lateness:		(0)/(4)
+
+(#)
+- passes basic test
+	makefile-ext basic-test
+
+(%)
+- passes extended test 
+	makefile-ext extended-test
+
+(late)
+- due fri aug 28
+  -1 mon aug 31
+  -2 fri sep 4
+
+commit:
+r257 | aiko | 2020-08-29 11:20:55 -0400 (Sat, 29 Aug 2020) | 1 line
+
+
+comments:
+	line 23: this should not be a global variable. 

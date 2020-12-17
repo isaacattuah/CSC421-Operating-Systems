@@ -1,0 +1,34 @@
+QUIZ 6
+
+Name: Isaac Attuah
+Grade: 1
+
+Date out: 19 oct 2020
+Date due: 28 oct 2020
+
+Run the "hello world" fuse file system.
+
+In just a few sentences, explain the observed output from the Makefile test target,
+and why it is correct.
+
+Observed Ouput:
+gcc -Wall hello.c `pkg-config fuse --cflags --libs` -o hello
+mkdir mnt
+./hello mnt
+ls -la mnt
+total 4
+drwxr-xr-x 2 root        root           0 Dec 31  1969 .
+drwxrwxr-x 3 isaacattuah isaacattuah 4096 Oct 27 22:32 ..
+-r--r--r-- 1 root        root          13 Dec 31  1969 hello
+cat mnt/hello
+Hello World!
+fusermount -u mnt
+
+Explanation:
+The Makefile target first compiles the hello.c whilst using package information from the FUSE packager. This compilation produces a hello executable. The program then makes a directory called mnt which will serves as a mount point for our filesystem. The hello executable is executed on the mnt directory. This execution marks the mounting of our file system unto mnt. The program then lists all the content of the mnt folder and this shows two mount points,one assigned to root and the other to user, and a mounted file called hello, which is assigned to root. The root files have the epoch time from December 31st 1969 which is a clear indicator of the origins of the linux filesystem. This date proves our solution is correct.
+
+Address the question, what is the nature of the "file" seen in the ls, and the 
+contents of that "file" as seen in the cat.
+
+The "file" hello is a read-only ASCII Text file. It contains the text "Hello World!"
+

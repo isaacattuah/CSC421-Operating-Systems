@@ -1,0 +1,301 @@
+class: csc421-211
+project: proj5
+student: aiko
+date:
+grade: 4/6
+
+code review(&):	1/1
+basic 1 (#):	1/2
+basic 2 ($):	0/2
+extend  (%):	0/1
+EC (!):			2/2
+
+lateness:		(0)/(4)
+
+(&)
+- code review: comments on the monitor implementation 
+
+(#)
+- basic 1: partial and complete 
+  Makefile-x basic-1-r, basic-1-w (two terminals)
+
+($)
+- basic 2: partial and complete 
+  Makefile-x basic-1-mm-t1, basic-1-mm-t2 (two terminals)
+
+($)
+- extend
+  Makefile-x ext-1-mm-t1, ext-1-mm-t2, ext-1-mm-t3 (three terminals)
+
+(!)
+- if extended was awarded points, EC is 1 point
+- else up to two points for correcting basic test deficiencies
+
+commit:
+r786 | aiko | 2020-10-16 13:23:26 -0400 (Fri, 16 Oct 2020) | 1 line
+
+commit-EC:
+r1044 | aiko | 2020-11-24 21:01:32 -0500 (Tue, 24 Nov 2020) | 1 line
+
+comments:
+	* code review
+	I disagree with the message_reader and message_write code.
+	There is no real loop here - the while(1) is superfluous, all code
+	paths inside the while have a return before the bottom of the loop.
+	Otherwise, it seems you continue if the situation happens to be favorable,
+	else you wait until it is but then you exit immediately
+	
+	** assertion error/ how was this tested?
+	** returns -1 and that is interpreted as a character
+	
+
+	## test 1 
+	## reader	
+	ojo@csc421-211:~/csc421.svn/aiko/proj5$ make run-reader
+	./mymessage -vr
+	mymessage: mymessage.c:129: main: Assertion `m>=0' failed.
+	Makefile:24: recipe for target 'run-reader' failed
+	make: *** [run-reader] Aborted (core dumped)
+	ojo@csc421-211:~/csc421.svn/aiko/proj5$ 
+
+	# writer
+	ojo@csc421-211:~/csc421.svn/aiko/proj5$ make run-writer
+	./mymessage -vs1 abc12012
+	ojo@csc421-211:~/csc421.svn/aiko/proj5$ 
+
+
+	** fixing, but how could you have run the tests?
+	
+	ojo@csc421-211:~/csc421.svn/aiko/proj5$ svn diff mymessage.c
+	Index: mymessage.c
+	===================================================================
+	--- mymessage.c	(revision 972)
+	+++ mymessage.c	(working copy)
+	@@ -126,7 +126,7 @@
+			if (is_reader) {
+				do {
+					m = message_reader() ;
+	-				assert(m>=0) ;
+	+				// assert(m>=0) ; // -bjr
+					// test for binary transfers. [0-9] are mapped
+					printf("%c", (char) ((m<10)?m+'0':m)) ;
+					fflush(NULL) ;
+	ojo@csc421-211:~/csc421.svn/aiko/proj5$ 
+
+	# reader
+		ojo@csc421-211:~/csc421.svn/aiko/proj5$ make -f Makefile-x basic-1-r
+		make -f Makefile-x run-reader-x
+		make[1]: Entering directory '/home/ojo/csc421.svn/aiko/proj5'
+		./mymessage -vr
+		/a/b/c/1/2/0
+		make[1]: Leaving directory '/home/ojo/csc421.svn/aiko/proj5'
+		make -f Makefile-x run-reader-x
+		make[1]: Entering directory '/home/ojo/csc421.svn/aiko/proj5'
+		./mymessage -vr
+		/1/2/0
+		make[1]: Leaving directory '/home/ojo/csc421.svn/aiko/proj5'
+		make -f Makefile-x run-reader-x
+		make[1]: Entering directory '/home/ojo/csc421.svn/aiko/proj5'
+		./mymessage -vr
+		/a/1/A/b/c/B/2/d/e/C/f/3/D/g/h/i/E/4/k/F/l/m/5/G/o/p/H/q/6/r/s/I/t/7/K/u/v/L/w/8/M/9/0
+		make[1]: Leaving directory '/home/ojo/csc421.svn/aiko/proj5'
+		#term2
+		ojo@csc421-211:~/csc421.svn/aiko/proj5$ 
+		
+	#writer
+	ojo@csc421-211:~/csc421.svn/aiko/proj5$ make -f Makefile-x basic-1-w
+		make -f Makefile-x run-writer-x
+		make[1]: Entering directory '/home/ojo/csc421.svn/aiko/proj5'
+		./mymessage -s1 abc12012
+		make[1]: Leaving directory '/home/ojo/csc421.svn/aiko/proj5'
+		make -f Makefile-x run-writer-0
+		make[1]: Entering directory '/home/ojo/csc421.svn/aiko/proj5'
+		./mymessage 0
+		make[1]: Leaving directory '/home/ojo/csc421.svn/aiko/proj5'
+		make -f Makefile-x run-writer-3-x
+		make[1]: Entering directory '/home/ojo/csc421.svn/aiko/proj5'
+		(./mymessage -s1 abcdefghiklmopqrstuvw &);(./mymessage -s2 ABCDEFGHIKLM &);./mymessage -s3 1234567890;echo "done!"
+		done!
+		make[1]: Leaving directory '/home/ojo/csc421.svn/aiko/proj5'
+		make -f Makefile-x run-writer-0
+		make[1]: Entering directory '/home/ojo/csc421.svn/aiko/proj5'
+		./mymessage 0
+		make[1]: Leaving directory '/home/ojo/csc421.svn/aiko/proj5'
+		ojo@csc421-211:~/csc421.svn/aiko/proj5$ 
+
+	# test 2
+	# term 1
+	ojo@csc421-211:~/csc421.svn/aiko/proj5$ make -f Makefile-x basic-1-mm-t1
+		make -f Makefile-x run-reader-mm-x
+		make[1]: Entering directory '/home/ojo/csc421.svn/aiko/proj5'
+		./mymessage -rm
+	* does not proceed
+	
+	# term 2
+	ojo@csc421-211:~/csc421.svn/aiko/proj5$ make -f Makefile-x basic-1-mm-t2
+		make -f Makefile-x run-writer-mm-x
+		make[1]: Entering directory '/home/ojo/csc421.svn/aiko/proj5'
+		./mymessage -m hello.world.a.0
+	* does not proceed
+	
+ ------------
+ 
+    # EC
+    # test1
+    # reader    
+    ojo@csc421-211:~/csc421.svn/aiko/proj5$ make -f Makefile-x basic-1-r
+		make -f Makefile-x run-reader-x
+		make[1]: Entering directory '/home/ojo/csc421.svn/aiko/proj5'
+		./mymessage -vr
+		abc120
+		make[1]: Leaving directory '/home/ojo/csc421.svn/aiko/proj5'
+		make -f Makefile-x run-reader-x
+		make[1]: Entering directory '/home/ojo/csc421.svn/aiko/proj5'
+		./mymessage -vr
+		120
+		make[1]: Leaving directory '/home/ojo/csc421.svn/aiko/proj5'
+		make -f Makefile-x run-reader-x
+		make[1]: Entering directory '/home/ojo/csc421.svn/aiko/proj5'
+		./mymessage -vr
+		a1AbcB2deCf3DghEi4kFlm5GopHq6rIst7KuvLw8M90
+		make[1]: Leaving directory '/home/ojo/csc421.svn/aiko/proj5'
+		#term2
+	# writer
+	ojo@csc421-211:~/csc421.svn/aiko/proj5$ make -f Makefile-x basic-1-w
+		make -f Makefile-x run-writer-x
+		make[1]: Entering directory '/home/ojo/csc421.svn/aiko/proj5'
+		./mymessage -s1 abc12012
+		make[1]: Leaving directory '/home/ojo/csc421.svn/aiko/proj5'
+		make -f Makefile-x run-writer-0
+		make[1]: Entering directory '/home/ojo/csc421.svn/aiko/proj5'
+		./mymessage 0
+		make[1]: Leaving directory '/home/ojo/csc421.svn/aiko/proj5'
+		make -f Makefile-x run-writer-3-x
+		make[1]: Entering directory '/home/ojo/csc421.svn/aiko/proj5'
+		(./mymessage -s1 abcdefghiklmopqrstuvw &);(./mymessage -s2 ABCDEFGHIKLM &);./mymessage -s3 1234567890;echo "done!"
+		done!
+		make[1]: Leaving directory '/home/ojo/csc421.svn/aiko/proj5'
+		make -f Makefile-x run-writer-0
+		make[1]: Entering directory '/home/ojo/csc421.svn/aiko/proj5'
+		./mymessage 0
+		make[1]: Leaving directory '/home/ojo/csc421.svn/aiko/proj5'
+		#term 1
+
+
+    # term 1
+    ojo@csc421-211:~/csc421.svn/aiko/proj5$ make -f Makefile-x basic-1-mm-t1
+		make -f Makefile-x run-reader-mm-x
+		make[1]: Entering directory '/home/ojo/csc421.svn/aiko/proj5'
+		make mymessage
+		make[2]: Entering directory '/home/ojo/csc421.svn/aiko/proj5'
+		cc -c mymessage-sub.c
+		cc -c ringbuf-sub.c
+		cc -c mymonitor-sub.c
+		cc -o mymessage mymessage.c mymessage-sub.o ringbuf-sub.o mymonitor-sub.o
+		make[2]: Leaving directory '/home/ojo/csc421.svn/aiko/proj5'
+		./mymessage -rm
+		hello
+		world
+		a
+
+		make[1]: Leaving directory '/home/ojo/csc421.svn/aiko/proj5'
+		make -f Makefile-x run-reader-mm-x
+		make[1]: Entering directory '/home/ojo/csc421.svn/aiko/proj5'
+		./mymessage -rm
+		rouge
+		11
+		rojo
+		blue
+		vert
+		azul
+		10
+		blanc
+		noir
+		verde
+		jaune
+		9
+		blanco
+		gris
+		marron
+		negro
+		rose
+		8
+		7
+		6
+		5
+		4
+		3
+		2
+		1
+
+		make[1]: Leaving directory '/home/ojo/csc421.svn/aiko/proj5'
+		make -f Makefile-x run-writer-mm-x
+		make[1]: Entering directory '/home/ojo/csc421.svn/aiko/proj5'
+		./mymessage -m hello.world.a.0
+		make[1]: Leaving directory '/home/ojo/csc421.svn/aiko/proj5'
+		make -f Makefile-x run-writer-mm-3-x
+		make[1]: Entering directory '/home/ojo/csc421.svn/aiko/proj5'
+		(./mymessage -m -s1 rouge.blue.vert.blanc.noir.jaune.gris.marron.rose &);(./mymessage -m -s2 rojo.azul.verde.blanco.negro&);./mymessage -m -s3 11.10.9.8.7.6.5.4.3.2.1.0;echo "done!"
+		done!
+		# term 1
+		make[1]: Leaving directory '/home/ojo/csc421.svn/aiko/proj5'
+		#term 2
+
+    
+    
+    # term 2
+    ojo@csc421-211:~/csc421.svn/aiko/proj5$ make -f Makefile-x basic-1-mm-t2
+		make -f Makefile-x run-writer-mm-x
+		make[1]: Entering directory '/home/ojo/csc421.svn/aiko/proj5'
+		./mymessage -m hello.world.a.0
+		make[1]: Leaving directory '/home/ojo/csc421.svn/aiko/proj5'
+		make -f Makefile-x run-writer-mm-3-x
+		make[1]: Entering directory '/home/ojo/csc421.svn/aiko/proj5'
+		(./mymessage -m -s1 rouge.blue.vert.blanc.noir.jaune.gris.marron.rose &);(./mymessage -m -s2 rojo.azul.verde.blanco.negro&);./mymessage -m -s3 11.10.9.8.7.6.5.4.3.2.1.0;echo "done!"
+		done!
+		# term 1
+		make[1]: Leaving directory '/home/ojo/csc421.svn/aiko/proj5'
+		sleep 3
+		make -f Makefile-x run-reader-mm-x
+		make[1]: Entering directory '/home/ojo/csc421.svn/aiko/proj5'
+		./mymessage -rm
+		hello
+		world
+		a
+
+		make[1]: Leaving directory '/home/ojo/csc421.svn/aiko/proj5'
+		make -f Makefile-x run-reader-mm-x
+		make[1]: Entering directory '/home/ojo/csc421.svn/aiko/proj5'
+		./mymessage -rm
+		rouge
+		11
+		rojo
+		blue
+		azul
+		vert
+		10
+		blanc
+		verde
+		noir
+		jaune
+		9
+		blanco
+		gris
+		marron
+		negro
+		rose
+		8
+		7
+		6
+		5
+		4
+		3
+		2
+		1
+
+		make[1]: Leaving directory '/home/ojo/csc421.svn/aiko/proj5'
+		ojo@csc421-211:~/csc421.svn/aiko/proj5$ 
+
+
+	
+	
